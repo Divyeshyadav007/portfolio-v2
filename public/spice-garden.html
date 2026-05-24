@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Garden | Authentic Indian Cuisine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --saffron:  #b85600;
+            --cream:    #8a4400;
+            --gold:     #a46000;
+            --dark:     #fdf6ed;
+            --card:     #ffffff;
+            --card2:    #fff6ec;
+            --text:     #2a1604;
+            --muted:    rgba(42,22,4,0.54);
+            --gradient: linear-gradient(135deg, #d05808, #ae4600, #c86800);
+            --border:   rgba(42,22,4,0.10);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ====== NAV ====== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(253,246,237,0.96);
+            border-bottom: 1px solid var(--border);
+            transition: padding 0.3s;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--saffron); }
+
+        .nav-book {
+            background: var(--gradient) !important;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            transition: transform 0.3s, box-shadow 0.3s !important;
+        }
+
+        .nav-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192,88,0,0.3);
+            color: #fff !important;
+        }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+        .hamburger span { width: 24px; height: 2px; background: var(--saffron); display: block; }
+
+        /* ====== HERO ====== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 60%, rgba(245,185,122,0.14) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 30%, rgba(232,164,74,0.1) 0%, transparent 55%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245,185,122,0.1);
+            border: 1px solid rgba(245,185,122,0.28);
+            padding: 7px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--saffron);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge span { font-size: 1rem; }
+
+        h1 {
+            font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+            padding: 13px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(192,88,0,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            padding: 13px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 1px solid rgba(240,236,229,0.18);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .btn-outline:hover { border-color: var(--saffron); color: var(--saffron); transform: translateY(-3px); }
+
+        .hero-stats {
+            display: flex;
+            gap: 36px;
+            margin-top: 56px;
+            padding-top: 36px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat h3 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat p { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
+
+        /* Hero decorative shapes */
+        .blob {
+            position: absolute;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            pointer-events: none;
+            animation: floatBlob 8s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 380px; height: 380px;
+            right: -60px; top: 12%;
+            background: linear-gradient(135deg, rgba(245,185,122,0.1), rgba(232,164,74,0.08));
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 200px; height: 200px;
+            right: 20%; bottom: 12%;
+            background: linear-gradient(135deg, rgba(252,233,200,0.1), rgba(245,185,122,0.07));
+            border-radius: 50%;
+            animation-delay: -4s;
+        }
+
+        .blob-3 {
+            width: 300px; height: 300px;
+            left: -80px; top: 30%;
+            background: radial-gradient(circle, rgba(245,185,122,0.09) 0%, transparent 70%);
+            border-radius: 50%;
+            animation-delay: -2.5s;
+        }
+
+        .blob-4 {
+            width: 150px; height: 150px;
+            left: 28%; bottom: 20%;
+            background: linear-gradient(135deg, rgba(232,164,74,0.08), rgba(252,233,200,0.05));
+            border-radius: 50% 40% 65% 45%;
+            animation-delay: -6.5s;
+        }
+
+        /* Mandala dot-grid texture */
+        .hero-dots {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(176,86,0,0.10) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        /* Spice accent ring */
+        .hero-ring {
+            position: absolute;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            border: 1px solid rgba(176,86,0,0.18);
+            pointer-events: none;
+            animation: floatBlob 10s ease-in-out infinite;
+        }
+
+        .hero-ring::before {
+            content: '';
+            position: absolute;
+            inset: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(176,86,0,0.12);
+        }
+
+        .hero-ring::after {
+            content: '';
+            position: absolute;
+            inset: 60px;
+            border-radius: 50%;
+            border: 1px solid rgba(176,86,0,0.08);
+        }
+
+        @keyframes floatBlob {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(8deg); }
+        }
+
+        /* ====== COMMON SECTION ====== */
+        section { padding: 90px 5%; }
+
+        .sec-header { text-align: center; margin-bottom: 60px; }
+        .sec-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 14px;
+        }
+
+        .sec-title {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+        }
+
+        .sec-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ====== FEATURED DISHES ====== */
+        #menu { background: rgba(240,236,229,0.02); }
+
+        .menu-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 9px 22px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid rgba(240,236,229,0.12);
+            background: transparent;
+            color: var(--muted);
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--gradient);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        .dish-card {
+            background: var(--card);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.4);
+            border-color: rgba(245,185,122,0.25);
+        }
+
+        .dish-img {
+            height: 215px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2a1508, #3d2010);
+        }
+
+        .dish-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.65s ease;
+        }
+
+        .dish-card:hover .dish-img img { transform: scale(1.08); }
+
+        .dish-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--card) 0%, rgba(253,246,237,0.2) 55%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .dish-body { padding: 18px 20px 20px; }
+
+        .dish-category {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 6px;
+        }
+
+        .dish-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .dish-desc {
+            font-size: 0.83rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .dish-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dish-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dish-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 50px;
+            background: rgba(245,185,122,0.1);
+            color: var(--saffron);
+            border: 1px solid rgba(245,185,122,0.2);
+        }
+
+        .dish-card[data-cat] { transition: opacity 0.3s, transform 0.3s; }
+        .dish-card.hidden    { display: none; }
+
+        /* ====== ABOUT ====== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .about-box {
+            border-radius: 18px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            position: relative;
+        }
+
+        .about-box img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-box:hover img { transform: scale(1.06); }
+
+        .ab1 { background: linear-gradient(135deg, #ffe0b0, #ffcb88); }
+        .ab2 { background: linear-gradient(135deg, #ffeacc, #ffd4a0); margin-top: 24px; }
+        .ab3 { background: linear-gradient(135deg, #ffd8a0, #ffbf70); margin-top: -24px; }
+        .ab4 { background: linear-gradient(135deg, #ffecd0, #ffdaaa); }
+
+        .about-text h2 {
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .about-stat {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .about-stat h4 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-stat p { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+        /* ====== BOOKING ====== */
+        #booking { background: rgba(240,236,229,0.02); }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .booking-info h2 {
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .booking-info p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .info-items { display: flex; flex-direction: column; gap: 14px; }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        .info-icon {
+            width: 40px; height: 40px;
+            background: rgba(245,185,122,0.1);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+        }
+
+        .info-item h4 { font-size: 0.88rem; font-weight: 600; }
+        .info-item p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+        .booking-form {
+            background: var(--card);
+            border-radius: 22px;
+            padding: 38px;
+            border: 1px solid var(--border);
+        }
+
+        .booking-form h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-group { margin-bottom: 18px; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(42,22,4,0.04);
+            border: 1px solid rgba(42,22,4,0.09);
+            border-radius: 11px;
+            padding: 12px 14px;
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: rgba(245,185,122,0.45);
+            box-shadow: 0 0 0 3px rgba(245,185,122,0.1);
+        }
+
+        .form-group select option { background: #fff6ec; }
+        .form-group input::placeholder { color: rgba(42,22,4,0.30); }
+
+        /* ====== LOCATION ====== */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .location-info { display: flex; flex-direction: column; gap: 14px; }
+
+        .location-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 22px;
+            border: 1px solid var(--border);
+        }
+
+        .location-card h4 {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 8px;
+        }
+
+        .location-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .location-card strong { color: var(--text); }
+
+        .map-placeholder {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 280px;
+            background: linear-gradient(135deg, #fff4dc, #ffe8bc);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(245,185,122,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245,185,122,0.04) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .map-pin { font-size: 2.5rem; position: relative; z-index: 1; }
+        .map-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--saffron);
+            position: relative;
+            z-index: 1;
+        }
+
+        .map-addr {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: rgba(42,22,4,0.04);
+            border-top: 1px solid var(--border);
+            padding: 40px 5%;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--saffron); }
+
+        .footer-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(37,211,102,0.12);
+            border: 1px solid rgba(37,211,102,0.25);
+            color: #25d366;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .footer-wa:hover { background: rgba(37,211,102,0.2); transform: translateY(-2px); }
+
+        .footer-copy {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: rgba(42,22,4,0.35);
+            font-size: 0.82rem;
+        }
+
+        /* Back to portfolio */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover { color: var(--saffron); }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            .about-grid    { grid-template-columns: 1fr; gap: 40px; }
+            .booking-grid  { grid-template-columns: 1fr; gap: 36px; }
+            .location-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.open {
+                display: flex; flex-direction: column;
+                position: fixed; top: 65px; left: 0; right: 0;
+                background: rgba(253,246,237,0.99);
+                padding: 24px 5%; gap: 18px;
+                border-bottom: 1px solid var(--border);
+            }
+            section { padding: 64px 5%; }
+            .hero-stats { flex-wrap: wrap; gap: 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-visual { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-logo">&#127798; Spice Garden</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#booking">Book a Table</a></li>
+        <li><a href="#location">Find Us</a></li>
+        <li><a href="#booking" class="nav-book">Reserve Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-ring"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+
+    <div class="hero-content">
+        <div class="hero-badge"><span>&#127798;</span> Est. 2018 &bull; Mumbai, India</div>
+
+        <h1>
+            Authentic Indian<br>
+            Cuisine, <span class="gradient-text">Crafted<br>with Love.</span>
+        </h1>
+
+        <p class="hero-sub">
+            Every dish tells a story — of spices sourced from the finest farms,
+            recipes passed down through generations, and a passion for bringing
+            families together over great food.
+        </p>
+
+        <div class="hero-btns">
+            <a href="#booking" class="btn-primary">Book a Table &rarr;</a>
+            <a href="#menu" class="btn-outline">Explore Menu</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Dishes on Menu</p>
+            </div>
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Happy Guests / Month</p>
+            </div>
+            <div class="stat">
+                <h3>4.9&#9733;</h3>
+                <p>Average Rating</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+    <div class="sec-header reveal">
+        <span class="sec-tag">Our Menu</span>
+        <h2 class="sec-title">Explore <span class="gradient-text">Our Dishes</span></h2>
+        <p class="sec-sub">From aromatic starters to indulgent desserts — every bite is a journey.</p>
+    </div>
+
+    <div class="menu-tabs reveal">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="starter">Starters</button>
+        <button class="tab-btn" data-filter="main">Mains</button>
+        <button class="tab-btn" data-filter="dessert">Desserts</button>
+        <button class="tab-btn" data-filter="drink">Drinks</button>
+    </div>
+
+    <div class="dishes-grid">
+        <div class="dish-card reveal" data-cat="starter">
+            <div class="dish-img" style="background: linear-gradient(135deg, #2a1508, #3d2010);">
+                <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=400&h=215&fit=crop&auto=format&q=80" alt="Paneer Tikka" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Starter</div>
+                <div class="dish-name">Paneer Tikka</div>
+                <div class="dish-desc">Marinated cottage cheese cubes grilled to perfection with bell peppers and onions.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;220</div>
+                    <div class="dish-badge">Veg &#127807;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="starter">
+            <div class="dish-img" style="background: linear-gradient(135deg, #1a1008, #2e1e0a);">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51e2b7b5945?w=400&h=215&fit=crop&auto=format&q=80" alt="Chicken Malai Tikka" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Starter</div>
+                <div class="dish-name">Chicken Malai Tikka</div>
+                <div class="dish-desc">Tender chicken marinated in cream and mild spices, slow-cooked in our tandoor.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;280</div>
+                    <div class="dish-badge">Chef's Pick &#11088;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="main">
+            <div class="dish-img" style="background: linear-gradient(135deg, #251008, #401a0a);">
+                <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&h=215&fit=crop&auto=format&q=80" alt="Butter Chicken" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Main Course</div>
+                <div class="dish-name">Butter Chicken</div>
+                <div class="dish-desc">Slow-cooked chicken in a rich, velvety tomato butter gravy. A timeless classic.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;320</div>
+                    <div class="dish-badge">Best Seller &#128293;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="main">
+            <div class="dish-img" style="background: linear-gradient(135deg, #1a1208, #301e08);">
+                <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=215&fit=crop&auto=format&q=80" alt="Dal Makhani" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Main Course</div>
+                <div class="dish-name">Dal Makhani</div>
+                <div class="dish-desc">Black lentils slow-cooked overnight with butter and cream. Comfort in a bowl.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;180</div>
+                    <div class="dish-badge">Veg &#127807;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="main">
+            <div class="dish-img" style="background: linear-gradient(135deg, #201508, #381f0a);">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=215&fit=crop&auto=format&q=80" alt="Hyderabadi Biryani" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Main Course</div>
+                <div class="dish-name">Hyderabadi Biryani</div>
+                <div class="dish-desc">Fragrant basmati rice layered with slow-cooked mutton and saffron. Royal flavour.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;380</div>
+                    <div class="dish-badge">Signature &#127798;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="dessert">
+            <div class="dish-img" style="background: linear-gradient(135deg, #1e1008, #2e1808);">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=215&fit=crop&auto=format&q=80" alt="Gulab Jamun" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Dessert</div>
+                <div class="dish-name">Gulab Jamun</div>
+                <div class="dish-desc">Soft milk-solid dumplings soaked in rose-flavoured sugar syrup. Pure bliss.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;120</div>
+                    <div class="dish-badge">Must Try &#10084;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="dessert">
+            <div class="dish-img" style="background: linear-gradient(135deg, #1a1008, #281808);">
+                <img src="https://images.unsplash.com/photo-1666792529843-7de3a73d48e7?w=400&h=215&fit=crop&auto=format&q=80" alt="Rasmalai" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Dessert</div>
+                <div class="dish-name">Rasmalai</div>
+                <div class="dish-desc">Soft cottage cheese discs soaked in chilled saffron-infused milk. Heavenly.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;150</div>
+                    <div class="dish-badge">Veg &#127807;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dish-card reveal" data-cat="drink">
+            <div class="dish-img" style="background: linear-gradient(135deg, #181208, #2a1e0a);">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=215&fit=crop&auto=format&q=80" alt="Mango Lassi" onerror="this.remove()">
+            </div>
+            <div class="dish-body">
+                <div class="dish-category">Drink</div>
+                <div class="dish-name">Mango Lassi</div>
+                <div class="dish-desc">Thick, creamy yoghurt blended with ripe Alphonso mangoes. Refreshingly sweet.</div>
+                <div class="dish-footer">
+                    <div class="dish-price">&#8377;90</div>
+                    <div class="dish-badge">Seasonal &#127788;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="about-grid">
+        <div class="about-visual reveal">
+            <div class="about-box ab1"><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=300&fit=crop&auto=format&q=80" alt="Our Kitchen" onerror="this.remove()"></div>
+            <div class="about-box ab2"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&h=300&fit=crop&auto=format&q=80" alt="Fresh Ingredients" onerror="this.remove()"></div>
+            <div class="about-box ab3"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=300&h=300&fit=crop&auto=format&q=80" alt="Restaurant Ambience" onerror="this.remove()"></div>
+            <div class="about-box ab4"><img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=300&h=300&fit=crop&auto=format&q=80" alt="Our Dishes" onerror="this.remove()"></div>
+        </div>
+
+        <div class="about-text reveal">
+            <span class="sec-tag">Our Story</span>
+            <h2>A Family Tradition,<br><span class="gradient-text">Served with Pride.</span></h2>
+            <p>Spice Garden was born in 2018 when Chef Vikram Malhotra brought his grandmother's recipes from Lucknow to Mumbai. What started as a small tiffin service has grown into one of the city's most-loved dining destinations.</p>
+            <p>Every spice we use is sourced directly from farms in Rajasthan, Kerala, and Assam. We believe great food starts with great ingredients — and even greater care.</p>
+            <p>Today, our team of 12 chefs serves over 500 guests each month, but the warmth and soul of home cooking remains unchanged.</p>
+
+            <div class="about-stats">
+                <div class="about-stat">
+                    <h4>2018</h4>
+                    <p>Year Founded</p>
+                </div>
+                <div class="about-stat">
+                    <h4>12+</h4>
+                    <p>Expert Chefs</p>
+                </div>
+                <div class="about-stat">
+                    <h4>50+</h4>
+                    <p>Dishes on Menu</p>
+                </div>
+                <div class="about-stat">
+                    <h4>4.9&#9733;</h4>
+                    <p>Google Rating</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+    <div class="booking-grid">
+        <div class="booking-info reveal">
+            <span class="sec-tag">Reservations</span>
+            <h2>Book Your<br><span class="gradient-text">Table Today.</span></h2>
+            <p>Reserve your table in under 2 minutes. We'll confirm your booking via WhatsApp within 30 minutes.</p>
+
+            <div class="info-items">
+                <div class="info-item">
+                    <div class="info-icon">&#128336;</div>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Mon–Sun: 12:00 PM – 11:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">&#128222;</div>
+                    <div>
+                        <h4>Phone Booking</h4>
+                        <p>+91 85291 60552</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">&#128101;</div>
+                    <div>
+                        <h4>Private Dining</h4>
+                        <p>Available for groups of 10+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-form reveal">
+            <h3>&#128203; Reserve a Table</h3>
+            <form id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+91 98765 43210" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <select>
+                            <option value="">Select time</option>
+                            <option>12:00 PM</option>
+                            <option>1:00 PM</option>
+                            <option>2:00 PM</option>
+                            <option>7:00 PM</option>
+                            <option>8:00 PM</option>
+                            <option>9:00 PM</option>
+                            <option>10:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests</label>
+                    <select>
+                        <option>2 Guests</option>
+                        <option>4 Guests</option>
+                        <option>6 Guests</option>
+                        <option>8 Guests</option>
+                        <option>10+ Guests (Private Dining)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Special Requests (optional)</label>
+                    <input type="text" placeholder="Anniversary setup, dietary restrictions, etc.">
+                </div>
+                <button type="submit" class="btn-primary" id="bookBtn" style="width:100%; justify-content:center; border:none; margin-top:4px;">
+                    Confirm Reservation &rarr;
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+    <div class="sec-header reveal">
+        <span class="sec-tag">Find Us</span>
+        <h2 class="sec-title">We're Right <span class="gradient-text">Around the Corner</span></h2>
+    </div>
+
+    <div class="location-grid reveal">
+        <div class="location-info">
+            <div class="location-card">
+                <h4>Address</h4>
+                <p><strong>Spice Garden Restaurant</strong><br>Shop 12, Andheri West<br>Mumbai, Maharashtra 400053</p>
+            </div>
+            <div class="location-card">
+                <h4>Opening Hours</h4>
+                <p>
+                    <strong>Monday – Friday:</strong> 12 PM – 11 PM<br>
+                    <strong>Saturday – Sunday:</strong> 11 AM – 11:30 PM<br>
+                    <strong>Public Holidays:</strong> 11 AM – 11 PM
+                </p>
+            </div>
+            <div class="location-card">
+                <h4>Contact</h4>
+                <p>
+                    <strong>Phone:</strong> +91 85291 60552<br>
+                    <strong>Email:</strong> hello@spicegarden.in<br>
+                    <strong>Parking:</strong> Available (free for 2 hrs)
+                </p>
+            </div>
+            <a href="https://wa.me/918529160552" style="display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.25);color:#25d366;padding:12px 22px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600;transition:all 0.3s;" onmouseover="this.style.background='rgba(37,211,102,0.2)'" onmouseout="this.style.background='rgba(37,211,102,0.12)'">
+                &#128172; Order on WhatsApp
+            </a>
+        </div>
+
+        <div class="map-placeholder">
+            <div class="map-pin">&#128205;</div>
+            <div class="map-label">Spice Garden Restaurant</div>
+            <div class="map-addr">Shop 12, Andheri West, Mumbai — Near D-Mart, Opposite Neptune Mall</div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">&#127798; Spice Garden</div>
+        <ul class="footer-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#booking">Book a Table</a></li>
+            <li><a href="#location">Location</a></li>
+        </ul>
+        <a href="https://wa.me/918529160552" class="footer-wa">&#128172; WhatsApp Us</a>
+    </div>
+    <div class="footer-copy">
+        &copy; 2025 Spice Garden Restaurant &middot; All rights reserved &middot;
+        <a href="index.html" style="color:rgba(245,185,122,0.6);text-decoration:none;">&#8592; Back to Portfolio</a>
+    </div>
+</footer>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').style.padding = window.scrollY > 50 ? '12px 5%' : '18px 5%';
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+    });
+
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add('visible'), i * 70);
+                revealObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Menu filter tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.dataset.filter;
+            document.querySelectorAll('.dish-card').forEach(card => {
+                card.classList.toggle('hidden', filter !== 'all' && card.dataset.cat !== filter);
+            });
+        });
+    });
+
+    // Booking form
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('bookBtn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = 'Booking Confirmed! &#10003; We will WhatsApp you shortly';
+        btn.style.background = 'linear-gradient(135deg, #7ecba4, #a8e6c8)';
+        btn.style.color = '#081510';
+        setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.style.background = '';
+            btn.style.color = '';
+            this.reset();
+        }, 4000);
+    });
+</script>
+</body>
+</html>

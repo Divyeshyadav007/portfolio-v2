@@ -1,13 +1,41 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function About() {
   const [photoLoaded, setPhotoLoaded] = useState(false);
   const [photoError, setPhotoError] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const onEnter = () => {
+    if (cardRef.current) cardRef.current.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
+  };
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    el.style.transform = `perspective(900px) rotateY(${x * 16}deg) rotateX(${-y * 12}deg) translateZ(22px) scale(1.03)`;
+    el.style.boxShadow = `${-x * 20}px ${-y * 15}px 40px rgba(17,17,17,0.2), 0 6px 24px rgba(17,17,17,0.12)`;
+  };
+  const onLeave = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = 'transform 0.45s ease, box-shadow 0.45s ease';
+    el.style.transform = '';
+    el.style.boxShadow = '';
+  };
 
   return (
     <section id="about">
-      <div className="about-img-wrap reveal">
+      <div
+        ref={cardRef}
+        className="about-img-wrap reveal"
+        onMouseEnter={onEnter}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        style={{ willChange: 'transform', cursor: 'default' }}
+      >
         <div className="about-photo">
           <span className="about-initials" style={photoLoaded ? { display: 'none' } : {}}>DY</span>
           {/* eslint-disable-next-line @next/next/no-img-element */}

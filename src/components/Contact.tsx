@@ -36,24 +36,24 @@ export default function Contact() {
         <div className="contact-links">
           <a href="mailto:divyeshyadav27@gmail.com" className="contact-link">
             <span className="contact-link-icon">✉</span>
-            <div>
+            <span style={{ display: 'block' }}>
               <span className="contact-link-label">Email</span>
               divyeshyadav27@gmail.com
-            </div>
+            </span>
           </a>
           <a href="https://wa.me/918529160552" className="contact-link" target="_blank" rel="noopener noreferrer">
             <span className="contact-link-icon">💬</span>
-            <div>
+            <span style={{ display: 'block' }}>
               <span className="contact-link-label">WhatsApp</span>
               Chat with me directly
-            </div>
+            </span>
           </a>
           <div className="contact-link" style={{ cursor: 'default' }}>
             <span className="contact-link-icon">📍</span>
-            <div>
+            <span style={{ display: 'block' }}>
               <span className="contact-link-label">Location</span>
               India — Working worldwide
-            </div>
+            </span>
           </div>
         </div>
       </div>

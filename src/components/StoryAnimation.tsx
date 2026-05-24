@@ -120,7 +120,7 @@ export default function StoryAnimation() {
   const handlePrev = () => { if (timerRef.current) clearInterval(timerRef.current); goTo(cur - 1); };
   const handleDot  = (i: number) => { if (timerRef.current) clearInterval(timerRef.current); goTo(i); };
 
-  const handleMouseEnter = () => {
+  const startTimer = () => {
     playSceneSound(cur);
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -132,16 +132,18 @@ export default function StoryAnimation() {
     }, 2500);
   };
 
+  const handleMouseEnter = () => startTimer();
   const handleMouseLeave = () => {
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   };
+  const handleTouchStart = () => { if (!timerRef.current) startTimer(); };
 
   useEffect(() => {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
   return (
-    <div className="story-wrap reveal" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="story-wrap reveal" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart}>
       <div className="story-progress-bar">
         <div className="story-progress-fill" style={{ width: `${(cur + 1) / TOTAL * 100}%` }} />
       </div>

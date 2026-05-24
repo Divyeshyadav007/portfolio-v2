@@ -394,6 +394,7 @@ section { padding: 100px 5%; }
 
 /* ── STORY ANIMATION ── */
 .story-wrap { background: #0d0d0d; border-radius: 16px; overflow: hidden; margin: 0 auto 72px; border: 1px solid rgba(245,240,232,0.06); cursor: pointer; max-width: 75%; }
+@media (max-width: 768px) { .story-wrap { max-width: 100%; border-radius: 12px; } }
 .story-stage-wrap::after {
   content: '▶ hover to play';
   position: absolute; bottom: 12px; right: 16px;
@@ -453,7 +454,15 @@ section { padding: 100px 5%; }
 .cb3 { animation: crowd-bob 1.3s ease-in-out infinite 0.36s; }
 .cb4 { animation: crowd-bob 1.3s ease-in-out infinite 0.54s; }
 .cb5 { animation: crowd-bob 1.3s ease-in-out infinite 0.72s; }
-@media (max-width: 600px) { .story-head { padding: 24px 20px 16px; } .story-nav { padding: 14px 20px; } .story-tagline { display: none; } }
+@media (max-width: 600px) {
+  .story-head { padding: 16px 16px 12px; }
+  .story-tagline { display: none; }
+  .story-nav { padding: 10px 14px; flex-direction: column; gap: 10px; }
+  .story-dots { justify-content: center; gap: 5px; }
+  .story-dot { width: 6px; height: 6px; }
+  .story-btns { width: 100%; justify-content: space-between; gap: 8px; }
+  .story-btn { flex: 1; text-align: center; justify-content: center; font-size: 0.68rem; padding: 7px 10px; }
+}
 
 /* ── PROCESS ── */
 .process-section { background: var(--text); padding: 60px 5%; }
@@ -540,6 +549,32 @@ footer { background: var(--text); padding: 28px 5%; display: flex; justify-conte
   .about-stats-row { gap: 10px; }
   .about-stat h4 { font-size: 1.1rem; }
   .about-stat p { font-size: 0.5rem; letter-spacing: 0; }
+}
+
+/* ── TOUCH 3D EFFECT (replaces mouse tilt on mobile) ── */
+@media (hover: none) {
+  .project-card:active {
+    transform: perspective(900px) translateZ(18px) scale(1.03) !important;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.18) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+  }
+  .pricing-card:active {
+    transform: perspective(900px) translateZ(18px) scale(1.03) !important;
+    box-shadow: 0 14px 36px rgba(17,17,17,0.16) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+  }
+  .svc-card:active {
+    transform: perspective(900px) translateZ(18px) scale(1.03) !important;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.14) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+  }
+  .about-img-wrap:active {
+    transform: perspective(900px) translateZ(16px) scale(1.02) !important;
+    box-shadow: 0 12px 32px rgba(17,17,17,0.16) !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+  }
+  /* story plays on tap instead of hover */
+  .story-stage-wrap::after { content: '▶ tap to play'; }
 }
 @media (max-width: 400px) {
   nav { top: 29px; }

@@ -104,7 +104,6 @@ const scenes = [
 ];
 
 const TOTAL = 9;
-const STEP  = 100 / TOTAL; // 11.111...%
 
 export default function StoryAnimation() {
   const [cur, setCur] = useState(0);
@@ -155,11 +154,7 @@ export default function StoryAnimation() {
         <p className="story-tagline">How Divyesh goes business to business — fixing them one website at a time.</p>
       </div>
       <div className="story-stage-wrap">
-        <div className="story-stage" style={{ transform: `translateX(${-cur * STEP}%)` }}>
-          {scenes.map((svg, i) => (
-            <div key={i} className="story-scene" dangerouslySetInnerHTML={{ __html: svg }} />
-          ))}
-        </div>
+        <div key={cur} className="story-scene" dangerouslySetInnerHTML={{ __html: scenes[cur] }} />
       </div>
       <div className="story-nav">
         <div className="story-dots">

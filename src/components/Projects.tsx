@@ -6,7 +6,10 @@ function Card3D({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onEnter = () => {
-    if (ref.current) ref.current.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
+    if (ref.current) {
+      ref.current.style.willChange = 'transform';
+      ref.current.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
+    }
   };
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -25,6 +28,7 @@ function Card3D({ children }: { children: React.ReactNode }) {
     el.style.transition = 'transform 0.45s ease, box-shadow 0.45s ease';
     el.style.transform = '';
     el.style.boxShadow = '';
+    el.style.willChange = 'auto';
   };
 
   return (
@@ -34,7 +38,6 @@ function Card3D({ children }: { children: React.ReactNode }) {
       onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ willChange: 'transform' }}
     >
       {children}
     </div>

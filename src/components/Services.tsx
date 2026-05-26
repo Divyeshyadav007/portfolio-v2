@@ -69,6 +69,7 @@ function SvcCard({ svc }: { svc: typeof SERVICES[0] }) {
 
   const onEnter = () => {
     if (ref.current) {
+      ref.current.style.willChange = 'transform';
       ref.current.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
     }
   };
@@ -87,6 +88,7 @@ function SvcCard({ svc }: { svc: typeof SERVICES[0] }) {
     el.style.transition = 'transform 0.45s ease, box-shadow 0.45s ease';
     el.style.transform = '';
     el.style.boxShadow = '';
+    el.style.willChange = 'auto';
   };
 
   return (
@@ -96,7 +98,7 @@ function SvcCard({ svc }: { svc: typeof SERVICES[0] }) {
       onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ background: svc.bg, borderColor: svc.border, willChange: 'transform' }}
+      style={{ background: svc.bg, borderColor: svc.border }}
     >
       <div className="svc-card-icon" style={{ color: svc.color }}>{svc.icon}</div>
       <h3 className="svc-card-title">{svc.title}</h3>
